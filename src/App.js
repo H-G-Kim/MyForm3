@@ -1,10 +1,8 @@
 import logo from './logo.svg'
 import './App.css'
-import React, { useState } from 'react'
-import Label from './components/Label'
+import React, { useEffect, useState } from 'react'
 import Input from './components/Input'
-import Option from './components/Option'
-import Select from './components/Select'
+
 
 //Select and input separately
 //Input and Label on same level
@@ -15,6 +13,12 @@ function App() {
   const [age, setAge] = useState(0)
   const [gender, setGender] = useState('Male')
 
+  useEffect(()=>{
+      // load booking data
+      console.log("gender changed")
+      //e.g days->call backend
+    }, [gender]);
+ 
   const handleFnameChange = (e) => {
     setFname(e.target.value)
   }
@@ -47,21 +51,21 @@ function App() {
   return (
     <div className="App">
       <form onSubmit={handleInputChange}>
-        <Label text="First Name">
-          <Input type="text" value={fname} onChange={handleFnameChange} />
-        </Label>
-        <Label text="Last Name">
-          <Input type="text" value={lname} onChange={handleLnameChange} />
-        </Label>
-        <Label text="Age">
-          <Input type="number" value={age} onChange={handleAgeChange} />
-        </Label>
-        <Label text="Gender">
-          <Select onChange={handleGenderChange} value={gender}>
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-          </Select>
-        </Label>
+
+          <Input  text="First Name"  type="text" value={fname} onChange={handleFnameChange} />
+      
+       
+          <Input text="Last Name" type="text" value={lname} onChange={handleLnameChange} />
+       
+ 
+          <Input text="Age" type="number" value={age} onChange={handleAgeChange} />
+     
+        <label text="Gender">
+          <select onChange={handleGenderChange} value={gender}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
 
         <Input type="submit" value="Submit" />
         <Input type="reset" value="reset" />
